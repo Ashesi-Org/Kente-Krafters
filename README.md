@@ -23,5 +23,5 @@ Kente Hub is built using the following tools:
 The goals of Kente Hub are to:
 
 -   Provide a user-friendly and seamless online platform for users of Kente to purchase any kente stole or fabric of interest.
--   Make Kente related products and services more accessible and convenient for clients, not only in Ghana but around the globe.
+-   Make Kente-related products and services more accessible and convenient for clients, not only in Ghana but around the globe.
 
