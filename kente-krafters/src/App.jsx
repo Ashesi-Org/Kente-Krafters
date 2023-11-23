@@ -1,6 +1,7 @@
-import Register from './pages/auth/register/Register.jsx'
+// import HomePage from "./pages/homepage/HomePage";
+import Login from "./pages/auth/login/Login";
 
 function App() {
-  return <Register/>;
+	return <Login />;
 }
 export default App;

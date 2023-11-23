@@ -79,7 +79,7 @@ const Register = () => {
 
 				<div className="flex-1 justify-center">
 					<img
-						src="src/assets/hero_page_img.jpeg"
+						src="src/assets/hero_page_img.png"
 						alt=""
 						className="w mx-auto"
 					/>

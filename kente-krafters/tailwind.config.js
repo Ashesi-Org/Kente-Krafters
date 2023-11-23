@@ -6,7 +6,12 @@ export default {
 			center: true,
 			padding: "1rem",
 		},
-		extend: {},
+		extend: {
+			colors: {
+				// this is the color from the logo
+				"logo-gray": "#48484a",
+			},
+		},
 	},
 	plugins: [],
 };
