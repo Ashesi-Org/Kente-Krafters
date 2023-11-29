@@ -22,103 +22,72 @@ connection.connect((err) => {
   console.log('Connected to MySQL as id ' + connection.threadId);
 
 });
-//Creating Pool for transaction
-const pool = mysql.createPool(connection);
 
 
 //Security and JSON Parsing
 app.use(bodyParser.json());
-app.use(cors()); // Add this line to enable CORS for all routes
+app.use(cors()); 
+
+
+app.get('/select-all', (req, res) => {
+  // SQL query to select all records from a table
+  const sql = 'SELECT * FROM WovenAdmin';
+
+  // Execute the query
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error executing MySQL query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      // Send the results as JSON
+      res.json(results);
+    }
+  });
+});
+
+
+
+
 
 //Resgistering an Administrator
 app.post('/registerAdmin', (req, res) => {
-  // Extract user and seller data
   const {first_name, last_name, country, email, user_passwordhash, admin_tel_no, admin_role, address, DOB, sex}= req.body;
-
-  // Start the transaction
-  pool.getConnection((err, connection) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error connecting to the database' });
-    }
-
-    connection.beginTransaction((err) => {
-      if (err) {
-        connection.release();
-        return res.status(500).json({ error: 'Error starting the transaction' });
-      }
-
-      // Insert into the user table without specifying the id column
-      const userInsertQuery = 'INSERT INTO User (first_name, last_name, country, email, user_passwordhash, user_role, user_status) VALUES (?, ?,?,?,?,?,?)';
-      const userInsertParams = [first_name, last_name, country, email, user_passwordhash, 'admin', 'active'];
+  const userInsertQuery = 'INSERT INTO User (first_name, last_name, country, email, user_passwordhash, user_role, user_status) VALUES (?, ?,?,?,?,?,?)';
+  const userInsertParams = [first_name, last_name, country, email, user_passwordhash, 'admin', 'active'];
 
       connection.query(userInsertQuery, userInsertParams, (err, userResults) => {
         if (err) {
           return connection.rollback(() => {
-            connection.release();
-            res.status(500).json({ error: 'Error inserting into user table' });
+            res.status(500).json({ error: 'Error inserting admin into user table' });
           });
         }
-
-        // Use the inserted user id for the student insert
         const userId = userResults.insertId;
-        const adminInsertQuery = 'INSERT INTO Customer(user_id) VALUES (?)';
+        const adminInsertQuery = 'INSERT INTO WovenAdmin(user_id, admin_tel_no, admin_role, address, DOB, sex) VALUES (?,?,?,?,?,?)';
         const adminInsertParams = [userId, admin_tel_no, admin_role, address, DOB, sex];
 
-        // Insert into the student table without specifying the id column
         connection.query(adminInsertQuery, adminInsertParams, (err) => {
           if (err) {
             return connection.rollback(() => {
-              connection.release();
               res.status(500).json({ error: 'Error inserting into admin table' });
             });
+          }else{
+            res.status(201).send('Admin registered successfully');
           }
-
-          // Commit the transaction if both inserts were successful
-          connection.commit((err) => {
-            if (err) {
-              return connection.rollback(() => {
-                connection.release();
-                res.status(500).json({ error: 'Error committing the transaction' });
-              });
-            }
-
-            // Release the connection back to the pool
-            connection.release();
-
-            res.json({ success: true, message: 'Transaction completed successfully' });
           });
         });
       });
-    });
-  });
-});
-
+    
 
 //Registering a Customer
 app.post('/registerCustomer', (req, res) => {
   // Extract user and seller data
   const {first_name, last_name, country, email, user_passwordhash}= req.body;
-
-  // Start the transaction
-  pool.getConnection((err, connection) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error connecting to the database' });
-    }
-
-    connection.beginTransaction((err) => {
-      if (err) {
-        connection.release();
-        return res.status(500).json({ error: 'Error starting the transaction' });
-      }
-
-      // Insert into the user table without specifying the id column
       const userInsertQuery = 'INSERT INTO User (first_name, last_name, country, email, user_passwordhash, user_role, user_status) VALUES (?, ?,?,?,?,?,?)';
       const userInsertParams = [first_name, last_name, country, email, user_passwordhash, 'customer', 'active'];
 
       connection.query(userInsertQuery, userInsertParams, (err, userResults) => {
         if (err) {
           return connection.rollback(() => {
-            connection.release();
             res.status(500).json({ error: 'Error inserting into user table' });
           });
         }
@@ -132,99 +101,57 @@ app.post('/registerCustomer', (req, res) => {
         connection.query(customerInsertQuery, customerInsertParams, (err) => {
           if (err) {
             return connection.rollback(() => {
-              connection.release();
               res.status(500).json({ error: 'Error inserting into customer table' });
             });
           }
-
-          // Commit the transaction if both inserts were successful
-          connection.commit((err) => {
-            if (err) {
-              return connection.rollback(() => {
-                connection.release();
-                res.status(500).json({ error: 'Error committing the transaction' });
-              });
-            }
-
-            // Release the connection back to the pool
-            connection.release();
-
-            res.json({ success: true, message: 'Transaction completed successfully' });
+          else{
+            res.status(201).send('Customer registered successfully');
+          }
           });
         });
       });
-    });
-  });
-});
-
-
+  
+  
 
 
 //Registering a seller
 app.post('/registerSeller', (req, res) => {
   // Extract user and seller data
-  const { first_name, last_name, country, email, user_passwordhash, ghana_region, seller_tel_no, momo_number, address, DOB, sex}= req.body;
+  const { first_name, last_name, country, email, user_passwordhash, ghana_region, seller_tel_no, momo_number, address, DOB, sex} = req.body;
 
-  // Start the transaction
-  pool.getConnection((err, connection) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error connecting to the database' });
-    }
-
-    connection.beginTransaction((err) => {
-      if (err) {
-        connection.release();
-        return res.status(500).json({ error: 'Error starting the transaction' });
-      }
-
-      // Insert into the user table without specifying the id column
       const userInsertQuery = 'INSERT INTO User (first_name, last_name, country, email, user_passwordhash, user_role, user_status) VALUES (?, ?,?,?,?,?,?)';
       const userInsertParams = [first_name, last_name, country, email, user_passwordhash, 'seller', 'active'];
-
+      
       connection.query(userInsertQuery, userInsertParams, (err, userResults) => {
         if (err) {
           return connection.rollback(() => {
-            connection.release();
             res.status(500).json({ error: 'Error inserting into user table' });
           });
         }
 
         // Use the inserted user id for the student insert
         const userId = userResults.insertId;
-        const sellerInsertQuery = 'INSERT INTO Seller (user_id, ghana_region, seller_tel_no, momo_number, address, DOB, sex) VALUES (?, ?, ?, ?, ?, ?)';
+        const sellerInsertQuery = 'INSERT INTO Seller (userId, ghana_region, seller_tel_no, momo_number, address, DOB, sex) VALUES (?, ?, ?, ?, ?, ?)';
         const sellerInsertParams = [userId, ghana_region, seller_tel_no, momo_number, address, DOB, sex];
 
         // Insert into the student table without specifying the id column
         connection.query(sellerInsertQuery, sellerInsertParams, (err) => {
           if (err) {
             return connection.rollback(() => {
-              connection.release();
-              res.status(500).json({ error: 'Error inserting into seller table' });
+              res.status(500).json({ error: userId });
             });
           }
-
-          // Commit the transaction if both inserts were successful
-          connection.commit((err) => {
-            if (err) {
-              return connection.rollback(() => {
-                connection.release();
-                res.status(500).json({ error: 'Error committing the transaction' });
-              });
-            }
-
-            // Releasing the connection back to the pool
-            connection.release();
-
-            res.json({ success: true, message: 'Transaction completed successfully' });
+          else{
+            res.status(201).send('Seller registered successfully');
+          }
           });
         });
       });
-    });
-  });
-});
 
+
+      
 // Start the Express server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
