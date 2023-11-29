@@ -6,16 +6,15 @@ const Navbar = () => {
 				alt=""
 				className="w-32 mx-auto"
 			/>
-			<div>
-				<div className="inline-block"></div>
-				<div className="cursor-grab inline-block float-right">
+			<div className="mb-4">
+				<div className="flex items-center gap-4 justify-end">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						className="w-6 h-6 inline"
+						className="w-6 h-6 inline cursor-pointer"
 					>
 						<path
 							strokeLinecap="round"
@@ -30,7 +29,7 @@ const Navbar = () => {
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						className="w-6 h-6 inline"
+						className="w-6 h-6 inline cursor-pointer"
 					>
 						<path
 							strokeLinecap="round"
@@ -45,7 +44,7 @@ const Navbar = () => {
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						className="w-6 h-6  inline"
+						className="w-6 h-6  inline cursor-pointer"
 					>
 						<path
 							strokeLinecap="round"
@@ -56,24 +55,25 @@ const Navbar = () => {
 				</div>
 			</div>
 
-			<div>
-				<a className="my-0.5 mr-8" href="">
-					Kente Shopping
-				</a>
-				<a className="my-0.5 mr-8" href="">
-					Graduation Stoles
-				</a>
-				<a className="my-0.5 mr-8" href="">
-					Gifts and decoration
-				</a>
-				<div className="float-right">
-					<input
-						type="search"
-						name=""
-						id=""
-						className="py-0.5 px-2"
-					/>
+			<div className="flex justify-between mb-8">
+				<div className="flex items-center gap-8">
+					<a className="my-0.5" href="">
+						Kente Shopping
+					</a>
+					<a className="my-0.5" href="">
+						Graduation Stoles
+					</a>
+					<a className="my-0.5" href="">
+						Gifts and decoration
+					</a>
 				</div>
+				<input
+					type="search"
+					name=""
+					id=""
+					className="py-1 px-2 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-lg"
+					placeholder="Search"
+				/>
 			</div>
 		</div>
 	);
