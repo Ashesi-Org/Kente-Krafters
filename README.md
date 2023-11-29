@@ -15,8 +15,9 @@ Kente Hub hosts an extensive catalogue of Kente fabrics, which allows clients to
 Kente Hub is built using the following tools:
 
 -   React
+-   Express
+-   Node
 -   MySQL
--   PHP
 
 ## Goals
 
