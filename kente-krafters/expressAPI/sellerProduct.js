@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
 
+
 //User Views All Sellers Products
 router.get('/seller/:id/products/:offset', async (req, res) => {
     try {
@@ -10,7 +11,6 @@ router.get('/seller/:id/products/:offset', async (req, res) => {
         const seller_id = req.params.id;
         const sql = 'SELECT * FROM seller WHERE seller_id = $1 ORDER BY date LIMIT 10 OFFSET $2';
         const result = await connection.query(sql, [seller_id, userProvidedOffset]);
-
 
         res.json(result.rows);
     } catch (error) {
@@ -37,6 +37,4 @@ router.post('/seller/:id/products/', async (req, res) => {
 });
 
 //Removing a product
-
-
 module.exports = router;
