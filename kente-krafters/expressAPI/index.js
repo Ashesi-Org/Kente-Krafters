@@ -11,7 +11,7 @@ const signInRouter = require('./sign_in');
 const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
-
+const customerOrderRouter = require('./customerOrder');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -55,6 +55,7 @@ app.use(signInRouter);
 app.use(registerRouter);
 app.use(cartRouter);
 app.use(customerProductRouter);
+app.use(customerOrderRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
