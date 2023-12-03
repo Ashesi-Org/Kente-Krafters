@@ -7,12 +7,12 @@ const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+
 const signInRouter = require('./sign_in');
 const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
-
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',

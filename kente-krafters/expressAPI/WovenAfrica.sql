@@ -79,6 +79,7 @@ CREATE TABLE CartProduct (
     cart_id INT,
     product_id INT NOT NULL UNIQUE,
     quantity INT NOT NULL,
+    dateCarted DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (cart_id, product_id),
     FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
