@@ -13,6 +13,9 @@ const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
+const textileTemplateRouter = require('./customizeTextile');
+
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -56,6 +59,7 @@ app.use(registerRouter);
 app.use(cartRouter);
 app.use(customerProductRouter);
 app.use(customerOrderRouter);
+app.use(textileTemplateRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

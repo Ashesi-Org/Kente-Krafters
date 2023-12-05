@@ -119,11 +119,6 @@ CREATE TABLE VisaPayments(
     FOREIGN KEY (payment_id) REFERENCES Payment(payment_id)
 );
 
-CREATE TABLE DeliveryMethod(
-   delivery_method_id INT AUTO_INCREMENT PRIMARY KEY,
-   delivery_provider_name VARCHAR(50) NOT NULL UNIQUE
-);
-
 CREATE TABLE ProductOrder(
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     cart_id INT NOT NULL,
@@ -139,6 +134,7 @@ CREATE TABLE ProductOrder(
     product_id INT,
     unit_price DECIMAL(10, 2),
     total_price DECIMAL(10, 2),
+    seller_fulfilled VARCHAR(3) DEFAULT 'NO' CHECK (seller_fulfilled IN ('YES', 'NO')),
     FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
     FOREIGN KEY (customer_id) REFERENCES Customer(user_id),
     FOREIGN KEY (seller_id) REFERENCES Seller(user_id),
@@ -168,21 +164,18 @@ CREATE TABLE CustomFabricOrderDetails(
     FOREIGN KEY (order_id) REFERENCES ProductOrder(order_id)
 );
 
-
 -- Shipment table
 CREATE TABLE Shipment(
     shipment_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL UNIQUE,
-    delivery_type_id INT NOT NULL UNIQUE,
     delivery_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES ProductOrder(order_id)
-
 );
+
 
 -- FedExShipment table
 CREATE TABLE FedExShipment(
     shipment_id INT PRIMARY KEY,
-    order_id INT UNIQUE, 
     tracking_number VARCHAR(50) NOT NULL,
     estimated_delivery_date DATE,
     special_instructions VARCHAR(255),
@@ -193,7 +186,6 @@ CREATE TABLE FedExShipment(
 -- DHLShipment table
 CREATE TABLE DHLShipment(
     shipment_id INT PRIMARY KEY,
-    order_id INT UNIQUE,
     tracking_number VARCHAR(50) NOT NULL,
     customs_declaration VARCHAR(255),
     delivery_time_window VARCHAR(100),
