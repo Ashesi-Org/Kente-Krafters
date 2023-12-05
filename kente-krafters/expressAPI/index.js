@@ -7,14 +7,12 @@ const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-
 const signInRouter = require('./sign_in');
 const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
-const textileTemplateRouter = require('./customizeTextile');
-
+const textileTemplateRouter = require('./customizeFabric');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -33,9 +31,13 @@ connection.connect((err) => {
 });
 
 
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
+
 //Security and JSON Parsing
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static('public'));
 
 
 //Sending database connection to all routes
@@ -52,6 +54,9 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.get('/customizeFabricView', (req, res) => {
+    res.render('customizeFabricView', { /* any data you want to pass to the template */ });
+  });
 
 // Routers for different parts of application
 app.use(signInRouter);
@@ -60,6 +65,7 @@ app.use(cartRouter);
 app.use(customerProductRouter);
 app.use(customerOrderRouter);
 app.use(textileTemplateRouter);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
