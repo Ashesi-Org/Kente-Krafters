@@ -5,6 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Express.js + CreativeEditorSDK</title>
+  <style>
+    html{
+      width: 100%;
+      height: 100%;
+    }
+
+    body{
+      width: 99%;
+      height: 100%;
+    }
+    #cesdk_container{
+      width: 100%;
+      height: 95%;
+    }
+  </style>
 </head>
 <body>
   <div id="cesdk_container"></div>
@@ -19,6 +34,40 @@
       locale: 'en',
       theme: 'dark',
       role: 'Creator',
+      ui: {
+    colorLibraries: ['myDefaultPalette'],
+    i18n: {
+      en: {
+        'libraries.myDefaultPalette.label': 'My Default Palette'
+      }
+    },
+    pageFormats: {
+      'din-a2': {
+        default: true,
+        width: 150,
+        height: 200,
+        unit: 'Millimeter',
+        fixedOrientation: false,
+      },
+      'twitter-profile': {
+        width: 400,
+        height: 400,
+        unit: 'Pixel'
+      },
+      'american-letter': {
+        width: 8.5,
+        height: 11,
+        unit: 'Inch'
+      }
+    },
+    scale: 'normal',
+    stylesheets: {
+      /* ... */
+    },
+    elements: {
+      /* ... */
+    }
+  },
       callbacks: { onUpload: 'local' },
       logger: (message, logLevel) => {
         console.log(`${logLevel}: ${message}`);
@@ -26,11 +75,27 @@
     };
 
     CreativeEditorSDK.create('#cesdk_container', config).then(async (instance) => {
-      // Populate the asset library with default / demo asset sources.
-      instance.addDefaultAssetSources();
-      instance.addDemoAssetSources({ sceneMode: 'Design' });
-      await instance.createDesignScene();
-    });
+  // Do something with the instance of CreativeEditor SDK
+  // Populate the asset library with default / demo asset sources.
+  instance.addDefaultAssetSources();
+  instance.addDemoAssetSources({ sceneMode: 'Design' });
+  // Add an asset source with your own colors:
+  instance.engine.asset.addLocalSource('myDefaultPalette');
+  instance.engine.asset.addAssetToSource('myDefaultPalette', {
+    id: 'red',
+    label: { en: 'red' },
+    tags: { en: ['red'] },
+    payload: {
+      color: {
+        colorSpace: 'sRGB',
+        r: 1,
+        g: 0,
+        b: 0
+      }
+    }
+  });
+  await instance.createDesignScene();
+});
   </script>
 </body>
 </html>
