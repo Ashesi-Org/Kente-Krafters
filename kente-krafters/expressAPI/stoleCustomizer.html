@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express.js + CreativeEditorSDK</title>
+</head>
+<body>
+  <div id="cesdk_container"></div>
+
+  <!-- Include CreativeEditorSDK script -->
+  <script src="https://cdn.img.ly/packages/imgly/cesdk-js/1.18.1/cesdk.umd.js"></script>
+
+  <!-- Your initialization script -->
+  <script>
+    const config = {
+      baseURL: 'https://cdn.img.ly/packages/imgly/cesdk-js/1.18.1/assets',
+      locale: 'en',
+      theme: 'dark',
+      role: 'Creator',
+      callbacks: { onUpload: 'local' },
+      logger: (message, logLevel) => {
+        console.log(`${logLevel}: ${message}`);
+      }
+    };
+
+    CreativeEditorSDK.create('#cesdk_container', config).then(async (instance) => {
+      // Populate the asset library with default / demo asset sources.
+      instance.addDefaultAssetSources();
+      instance.addDemoAssetSources({ sceneMode: 'Design' });
+      await instance.createDesignScene();
+    });
+  </script>
+</body>
+</html>

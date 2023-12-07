@@ -14,6 +14,7 @@ const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
 const textileTemplateRouter = require('./customizeFabric');
 
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -56,7 +57,12 @@ app.use(session({
 
 app.get('/customizeFabricView', (req, res) => {
     res.render('customizeFabricView', { /* any data you want to pass to the template */ });
-  });
+});
+
+app.get('/CustomizeStoleView', (req, res) => {
+    res.sendFile(__dirname + '/stoleCustomizer.html');
+});
+
 
 // Routers for different parts of application
 app.use(signInRouter);
