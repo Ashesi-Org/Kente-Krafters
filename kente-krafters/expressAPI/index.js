@@ -8,6 +8,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 const signInRouter = require('./sign_in');
+const signOutRouter = require('./sign_out');
 const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
@@ -66,6 +67,7 @@ app.get('/CustomizeStoleView', (req, res) => {
 
 // Routers for different parts of application
 app.use(signInRouter);
+app.use(signOutRouter);
 app.use(registerRouter);
 app.use(cartRouter);
 app.use(customerProductRouter);

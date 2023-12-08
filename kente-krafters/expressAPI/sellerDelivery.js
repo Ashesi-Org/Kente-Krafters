@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
 
+
 //Seller sets order to DHL delivery in process
 router.post('/record-delivery-dhl', async (req, res) => {
     const connection = req.db;
@@ -16,7 +17,7 @@ router.post('/record-delivery-dhl', async (req, res) => {
             });
         }
         const shippmentId = results.insertId;
-        const dhlInsertQuery = 'INSERT INTO DHL(shippment_id, tracking_number, customs_declaration, delivery_time_window) VALUES (?,?,?,?)';
+        const dhlInsertQuery = 'INSERT INTO DHLShipment (shippment_id, tracking_number, customs_declaration, delivery_time_window) VALUES (?,?,?,?)';
         const dhlInsertParams = [shippmentId, tracking_number, customs_declaration, delivery_time_window];
         connection.query(dhlInsertQuery, dhlInsertParams, (err) => {
             if (err) {
@@ -24,7 +25,7 @@ router.post('/record-delivery-dhl', async (req, res) => {
                     res.status(500).json({error: 'Error inserting into customer table'});
                 });
             } else {
-                res.status(201).send('Customer registered successfully');
+                res.status(201).send('Delivery registered successfully');
             }
         });
     });
@@ -32,15 +33,6 @@ router.post('/record-delivery-dhl', async (req, res) => {
 
 //Collect Payment
 router.post('/claim-payment', async(req, res) =>{
-    //check if good is delivered
-    //Receive Payment from escrow
+    //check if good is delivered if so, trigger payment from escrow account
     //
 });
-
-
-//Seller sets order to GhanaPost delivery in process
-router.post('/record-delivery-ghana-post', async (req, res) => {
-//Logic for GhanaPost comes in here
-})
-
-

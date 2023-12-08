@@ -118,6 +118,9 @@ router.post('/checkout/cart-id', async (req, res) => {
         });
         // Respond with the map
         res.json({resultMap, cartTotal});
+
+
+        //Call Order API route once payment to woven Africa is complete
     });
 });
 module.exports = router;
