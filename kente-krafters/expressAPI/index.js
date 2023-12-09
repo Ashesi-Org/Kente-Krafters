@@ -13,7 +13,6 @@ const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
-const textileTemplateRouter = require('./customizeFabric');
 
 //Comment here
 app.use(bodyParser.json());
@@ -58,28 +57,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+
 app.get('/customizeFabricView', (req, res) => {
     res.render('customizeFabricView', { /* any data you want to pass to the template */ });
 });
-
-app.get('/CustomizeStoleView', (req, res) => {
-    res.sendFile(__dirname + '/stoleCustomizer.html');
-});
-
-app.get('/sunflower-image', async (req, res) => {
-    try {
-      const response = await axios.get('https://cdn.britannica.com/84/73184-050-05ED59CB/Sunflower-field-Fargo-North-Dakota.jpg', {
-        responseType: 'arraybuffer',
-      });
-  
-      res.setHeader('Content-Type', 'image/jpeg');
-      res.send(Buffer.from(response.data, 'binary'));
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Internal Server Error');
-    }
-  });
-
 
 // Routers for different parts of application
 app.use(signInRouter);
