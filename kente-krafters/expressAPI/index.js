@@ -15,6 +15,9 @@ const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
 const textileTemplateRouter = require('./customizeFabric');
 
+//Comment here
+app.use(bodyParser.json());
+app.use(cors()); // Add this line to enable CORS for all routes
 
 const connection = mysql.createConnection({
     host: 'localhost',
