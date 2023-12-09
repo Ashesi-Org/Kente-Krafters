@@ -4,23 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fabric Customizer</title>
+  
   <style>
-    
-    /* Style for the color picker */
-    #colorPicker {
-      position: absolute;
-      top: 10px;
-      left: 420px; /* Adjust the left position as needed */
-      width: 40px; /* Set the width and height to create a circular color picker */
-      height: 40px;
-      border: none;
-      outline: none;
-      padding: 0;
-      margin: 0;
-    }
     #addToCartButton {
-      width: 100px;
-      height: 40px;
+      width: 10em;
+      height: 4em;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -34,43 +22,59 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
     body{
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: 90%;
+      height: 100%;
+      padding: 1em;
+      gap: 1em;
+    }
+
+    .color-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .wrapper{
+      display: flex;
+      flex-direction: row;
     }
   </style>
+
 </head>
-
-  
 <body>
-  <div class="wrapper">
-    <input type="color" id="colorPicker" value="#000000">
+<div><canvas id="myCanvas" width="500" height="500"></canvas></div>
+<div class="wrapper">
+    <div class="color-circle" style="background-color: red;" onclick="setChosenColor('#FF0000')"></div>
+    <div class="color-circle" style="background-color: orange;" onclick="setChosenColor('#FFA500')"></div>
+    <div class="color-circle" style="background-color: yellow;" onclick="setChosenColor('#FFFF00')"></div>
+    <div class="color-circle" style="background-color: indigo;" onclick="setChosenColor('#4B0082')"></div>
+    <div class="color-circle" style="background-color: blue;" onclick="setChosenColor('#0000FF')"></div>
+    <div class="color-circle" style="background-color: violet;" onclick="setChosenColor('#EE82EE')"></div>
+</div>
+    <!-- Add more color circles as needed -->
   </div>
-  <div class="wrapper">
-  <canvas id="myCanvas" width="600" height="600"></canvas></div>
   <button id="addToCartButton">Add to Cart</button>
-
   
   <script>
     let selected_pixel = '';
+    let chosen_color = '';
     let finalDataDict = {};
     
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    const colorPicker = document.getElementById('colorPicker');  
-    
-    colorPicker.addEventListener('input', function () {
-      const selectedColor = this.value;
-      // alert(`Selected Color: ${selectedColor}`)
-      recolorAll(selected_pixel, selectedColor);
-    });
 
     canvas.addEventListener('click', function (event) {
-      const x = event.clientX - canvas.getBoundingClientRect().left;
-      const y = event.clientY - canvas.getBoundingClientRect().top;
+      const x = Math.round(event.clientX - canvas.getBoundingClientRect().left);
+      const y = Math.round(event.clientY - canvas.getBoundingClientRect().top);
+      // const x = event.clientX - canvas.getBoundingClientRect().left;
+      // const y = event.clientY - canvas.getBoundingClientRect().top;
       const clickedCoordinates = [y, x];
       selected_pixel = clickedCoordinates;
     });
@@ -78,13 +82,17 @@
     const addToCartButton = document.getElementById('addToCartButton');
     addToCartButton.addEventListener('click', addToCart);
 
-    
+    function setChosenColor(color) {
+        selected_color = color
+        recolorAll(selected_pixel, chosen_color);
+    }
+
     //A function to draw a textile
     function drawTextile(colordict){
+      const squareSize = 1; 
       for (const coord in colordict) {
-          const squareSize = 1;
-          if (finalDataDict.hasOwnProperty(coord)) {
-              const color = finalDataDict[coord];
+          if (colordict.hasOwnProperty(coord)) {
+              const color = colordict[coord];
               const [x, y] = coord.split(',').map(Number);
               ctx.fillStyle = color;
               ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
@@ -107,7 +115,7 @@
 
     
     // A function to recolor the textile
-    function recolorAll(coordinate, selectedColor) {
+    function recolorAll(coordinate, selectedColor){
         oldColor = finalDataDict[coordinate];
         console.log("This is old color" + oldColor);
         for (const key in finalDataDict) {
@@ -124,15 +132,11 @@
     //Function to save customization as image and store 
     function addToCart() {
       const imageDataURL = canvas.toDataURL('image/png');
-      // Create a temporary anchor element
       const downloadLink = document.createElement('a');
       downloadLink.href = imageDataURL;
       downloadLink.download = 'canvas_image.png';
-      // Append the anchor element to the document
       document.body.appendChild(downloadLink);
-      // Trigger a click on the anchor element to start the download
       downloadLink.click();
-      // Remove the anchor element from the document
       document.body.removeChild(downloadLink);
     }
 

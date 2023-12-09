@@ -41,7 +41,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
 
-
 //Sending database connection to all routes
 app.use((req, res, next) => {
     req.db = connection;
@@ -63,6 +62,20 @@ app.get('/customizeFabricView', (req, res) => {
 app.get('/CustomizeStoleView', (req, res) => {
     res.sendFile(__dirname + '/stoleCustomizer.html');
 });
+
+app.get('/sunflower-image', async (req, res) => {
+    try {
+      const response = await axios.get('https://cdn.britannica.com/84/73184-050-05ED59CB/Sunflower-field-Fargo-North-Dakota.jpg', {
+        responseType: 'arraybuffer',
+      });
+  
+      res.setHeader('Content-Type', 'image/jpeg');
+      res.send(Buffer.from(response.data, 'binary'));
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 
 // Routers for different parts of application
