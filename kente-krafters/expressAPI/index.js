@@ -1,9 +1,19 @@
+const PORT = process.env.PORT || 5000;
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
-const PORT = process.env.PORT || 5000;
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
+const signInRouter = require('./sign_in');
+const signOutRouter = require('./sign_out');
+const registerRouter = require('./register');
+const cartRouter = require('./cart');
+const customerProductRouter = require('./customerProduct');
+const customerOrderRouter = require('./customerOrder');
+const textileTemplateRouter = require('./customizeFabric');
 
 //Comment here
 app.use(bodyParser.json());
@@ -15,51 +25,59 @@ const connection = mysql.createConnection({
     password: '',
     database: 'WovenAfrica',
     port: 3306, // Your MySQL server port (default is 3306)
-  });
-
+});
 connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL: ' + err.stack);
-    return;
-  }
-  console.log('Connected to MySQL as id ' + connection.threadId);
-});
-
-
-app.get('/registerSeller', (req, res) =>{
-  const sql = 'SELECT * FROM User'
-  //res.send("Here are all our sellers")
-  connection.query(sql, (err, results) => {
     if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).send('Internal Server Error');
-      return;
+        console.error('Error connecting to MySQL: ' + err.stack);
+        return;
     }
-    // Send the results as JSON
-    res.json(results);
-  });
+    console.log('Connected to MySQL as id ' + connection.threadId);
+
 });
 
-//Regitser a New Seller
-app.post('/registerSeller', (req, res) => {
-  const { username, email, password } = req.body;
 
-  // Perform validation and hashing of the password before saving to the database
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
 
-  const sql = 'INSERT INTO User (first_name, last_name, country, email, user_passwordhash, user_role, user_status) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  const values = ["A", "A", "A", "A", "A", "seller", "active"]
-  connection.query(sql, values, (err, results) => {
-    if (err) {
-      console.error('Error during registration:', err);
-      res.status(500).json({ error: 'Registration failed' });
-    } else {
-      console.log('Registration successful');
-      res.status(200).json({ message: 'Registration successful' });
-    }
-  });
+//Security and JSON Parsing
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('public'));
+
+
+//Sending database connection to all routes
+app.use((req, res, next) => {
+    req.db = connection;
+    next();
 });
+
+
+// Use express-session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.get('/customizeFabricView', (req, res) => {
+    res.render('customizeFabricView', { /* any data you want to pass to the template */ });
+});
+
+app.get('/CustomizeStoleView', (req, res) => {
+    res.sendFile(__dirname + '/stoleCustomizer.html');
+});
+
+
+// Routers for different parts of application
+app.use(signInRouter);
+app.use(signOutRouter);
+app.use(registerRouter);
+app.use(cartRouter);
+app.use(customerProductRouter);
+app.use(customerOrderRouter);
+app.use(textileTemplateRouter);
+
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
-
