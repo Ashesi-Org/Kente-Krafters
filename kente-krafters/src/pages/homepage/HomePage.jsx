@@ -1,6 +1,8 @@
 import Navbar from "../../components/Navbar";
 import CategoryCard from "../../components/CategoryCard";
 import Footer from "../../components/Footer";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 const cardDetails = [
 	{
@@ -36,6 +38,51 @@ const HomePage = () => {
 	return (
 		<div>
 			<Navbar />
+
+			<Carousel
+				className="container"
+				autoPlay="true"
+				maxHeight="500px"
+				infiniteLoop="true"
+				interval={7000}
+			>
+				<div>
+					<img
+						src="src/assets/carousel_img_1.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Enhance your wedding celebration with our
+						beautiful stoles! 💍✨ Elevate your special day in
+						style. #CherishLove&rdquo;
+					</p>
+				</div>
+				<div>
+					<img
+						src="src/assets/carousel_img_2.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Embrace brotherhood with our premium fabrics!
+						🤝✨ Elevate unity in style. #FabricOfConnection&rdquo;
+					</p>
+				</div>
+				<div>
+					<img
+						src="src/assets/carousel_img_3.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Elevate your graduation with our stunning stoles!
+						🎓✨ #CelebrateSuccess&rdquo;
+					</p>
+				</div>
+			</Carousel>
+
+			<div></div>
 			<div className="container ">
 				<h2 className="text-center uppercase mb-8 text-2xl tracking-wider font-semibold">
 					Choose Your Category

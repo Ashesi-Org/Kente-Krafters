@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 381.84 562.32">
+   <defs>
+      <style>.ff4bc2b4-5218-40de-a800-50cd0e9793b2{opacity:0.53;}.ac84c06f-ef8a-481c-ab2a-4edc6e9c1879{fill:#1e1e1e;}.b30f8ff4-f997-4481-9180-a57d0acfa5cc{fill:#df2127;}.be0fbd63-3a08-409e-968d-9bcd0912312d{fill:#e19326;}.be24968a-559a-4770-8faa-a59240490f42{fill:#2b9948;}.a417f084-4e70-4116-b8ef-66afbc189291,.b914681d-6dfd-4fb0-8156-de66161a3740,.e1f42fdf-be77-40a1-bd61-02ad10eb4298{fill:#ffc758;}.e1f42fdf-be77-40a1-bd61-02ad10eb4298{writing-mode:tb;text-orientation:upright;glyph-orientation-vertical:0deg;font-size:15.29px;}.b914681d-6dfd-4fb0-8156-de66161a3740,.e1f42fdf-be77-40a1-bd61-02ad10eb4298{font-family:Montserrat-Black, Montserrat;font-weight:800;}.b914681d-6dfd-4fb0-8156-de66161a3740{font-size:17.15px;}.bf5130e4-ccae-41f5-82b7-5e1bc4a22ed7{letter-spacing:-0.01em;}.b4186c15-0c78-48dd-8470-65078e94fc3d{letter-spacing:-0.04em;}.f150c88f-e3b2-4dfc-9c82-4e27346f78a6{letter-spacing:0.02em;}.bceaf367-ef68-4fea-bae2-d11330ead9da{letter-spacing:0em;}.e5a7b2a6-5db4-491c-a0ed-4ea9eff76de8{letter-spacing:-0.03em;}</style>
+   </defs>
+   <title>Asset 23</title>
+   <g id="b6adfae3-99be-4ed7-b3b4-97798c1257a2" data-name="Layer 2">
+      <g id="a83ce902-1c7f-4543-b250-48e0c5966580" data-name="Layer 1">
+         <g class="ff4bc2b4-5218-40de-a800-50cd0e9793b2" />
+         <path class="base-stole ac84c06f-ef8a-481c-ab2a-4edc6e9c1879" d="M346.19,520.69H233.82C239.08,387,244.5,252.7,249.47,119c.39-10.3-1.11-38.12-1.62-42.65-1.63-14.39-6.19-28.51-4.55-43.24,9.29-.1,86.83,43.2,87.29,57.69C334.53,214.28,346.8,518.75,346.19,520.69Z" />
+         <path class="base-stole ac84c06f-ef8a-481c-ab2a-4edc6e9c1879" d="M36.45,520.69H148.82C143.56,387,138.14,252.7,133.16,119c-.38-10.3,1.12-38.12,1.63-42.65C136.42,62,141,47.87,139.34,33.14c-9.29-.1-86.83,43.2-87.29,57.69C48.1,214.28,35.84,518.75,36.45,520.69Z" />
+         <path d="M194.18,88c22.11,0,54.8,0,54.8,0s-3.38-35.13-5.68-54.77c-.17-5-38.59-.93-52-.3-13.39-.63-51.82-4.66-52,.3-2.29,19.64-5.67,54.77-5.67,54.77s32.88,0,54.8,0h5.72Z" />
+         
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="147.1 474.92 37.91 474.92 38.51 459.17 146.51 459.17 147.1 474.92" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="147.77 490.67 37.27 490.67 37.88 474.92 147.18 474.92 147.77 490.67" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="148.33 506.36 36.71 506.36 37.32 490.62 147.73 490.62 148.33 506.36" />
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="138.57 251.57 46.21 251.57 46.72 235.82 138.07 235.82 138.57 251.57" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="139.14 267.32 45.67 267.32 46.18 251.57 138.63 251.57 139.14 267.32" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="139.61 283.02 45.19 283.02 45.71 267.27 139.1 267.27 139.61 283.02" />
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="133.92 121.31 50.83 121.31 51.28 105.56 133.47 105.56 133.92 121.31" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="134.43 137.06 50.34 137.06 50.8 121.31 133.97 121.31 134.43 137.06" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="134.85 152.75 49.91 152.75 50.38 137.01 134.4 137.01 134.85 152.75" />
+         
+         <rect class="symbol-left a417f084-4e70-4116-b8ef-66afbc189291" x="63.06" y="187.11" width="56.78" height="3.5" />
+         <path class="symbol-left a417f084-4e70-4116-b8ef-66afbc189291" d="M119.84,209.7v-3.49h-11.6l10.57-10.57h1v-3.49H63.06v3.49H73.68L63.11,206.21h0v0l-.05.05.05.05v3.34Zm-22.37-4.21-.72.72h-.16L86,195.64h1.6Zm-4.9-9.85h14.75L99.94,203Zm-.93,10.57h-17l8.52-8.52Zm11.66,0h-.17l-.72-.72,9.85-9.85h1.6ZM78.62,195.64h1.6L69.66,206.21h-1.6Z" />
+         <rect class="symbol-left a417f084-4e70-4116-b8ef-66afbc189291" x="63.27" y="211.76" width="56.78" height="3.5" />
+
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="344.89 474.92 235.29 474.92 235.89 459.17 344.3 459.17 344.89 474.92" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="345.56 490.67 234.64 490.67 235.26 474.92 344.96 474.92 345.56 490.67" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="346.13 506.36 234.08 506.36 234.69 490.62 345.52 490.62 346.13 506.36" />
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="336.27 251.57 243.91 251.57 244.42 235.82 335.77 235.82 336.27 251.57" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="336.84 267.32 243.37 267.32 243.88 251.57 336.33 251.57 336.84 267.32" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="337.31 283.02 242.89 283.02 243.41 267.27 336.8 267.27 337.31 283.02" />
+         <polygon class="stripe-1 b30f8ff4-f997-4481-9180-a57d0acfa5cc" points="331.62 121.31 248.53 121.31 248.99 105.56 331.17 105.56 331.62 121.31" />
+         <polygon class="stripe-2 be0fbd63-3a08-409e-968d-9bcd0912312d" points="332.13 137.06 248.04 137.06 248.51 121.31 331.68 121.31 332.13 137.06" />
+         <polygon class="stripe-3 be24968a-559a-4770-8faa-a59240490f42" points="332.56 152.75 247.61 152.75 248.08 137.01 332.1 137.01 332.56 152.75" />
+         
+         <rect class="symbol-right a417f084-4e70-4116-b8ef-66afbc189291" x="262.66" y="187.11" width="56.78" height="3.5" />
+         <path class="symbol-right a417f084-4e70-4116-b8ef-66afbc189291" d="M319.44,209.7v-3.49H307.85l10.56-10.57h1v-3.49H262.66v3.49h10.62l-10.56,10.57h-.06v0l-.05.05.05.05v3.34Zm-22.37-4.21-.71.72h-.17l-10.56-10.57h1.6Zm-4.9-9.85h14.75L299.54,203Zm-.93,10.57h-17l8.51-8.52Zm11.66,0h-.17l-.71-.72,9.84-9.85h1.6Zm-24.68-10.57h1.6l-10.56,10.57h-1.6Z" />
+         <rect class="symbol-right a417f084-4e70-4116-b8ef-66afbc189291" x="262.87" y="211.76" width="56.78" height="3.5" />
+      </g>
+   </g>
+</svg>
