@@ -1,7 +1,6 @@
-drop SCHEMA if exists WovenAfrica;
-drop DATABASE if exists WovenAfrica;
-CREATE SCHEMA WovenAfrica;
-use WovenAfrica;
+drop DATABASE if exists wovenafricaglobal;
+CREATE DATABASE wovenafricaglobal;
+use wovenafricaglobal;
 
 CREATE TABLE User (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -125,10 +124,10 @@ CREATE TABLE ProductOrder(
     customer_id INT NOT NULL,
     seller_id INT NOT NULL,
     payment_id INT NOT NULL,
-    country varchar(100),
-    postal_code varchar(25),
+    country VARCHAR(100),
+    postal_code VARCHAR(25),
     delivery_address VARCHAR(255),
-    delivery_method_id INT NOT NULL,
+    delivery_method VARCHAR(255),
     order_status ENUM('delivered', 'in-transit', 'pending'),
     quantity INT,
     product_id INT,
@@ -138,8 +137,7 @@ CREATE TABLE ProductOrder(
     FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
     FOREIGN KEY (customer_id) REFERENCES Customer(user_id),
     FOREIGN KEY (seller_id) REFERENCES Seller(user_id),
-    FOREIGN KEY (payment_id) REFERENCES Payment(payment_id),
-    FOREIGN KEY (delivery_method_id) REFERENCES DeliveryMethod(delivery_method_id)
+    FOREIGN KEY (payment_id) REFERENCES Payment(payment_id)
 );
 
 -- StoleOrderDetails table (Specialization of OrderDetail)
@@ -176,6 +174,7 @@ CREATE TABLE Shipment(
 -- FedExShipment table
 CREATE TABLE FedExShipment(
     shipment_id INT PRIMARY KEY,
+    order_id INT UNIQUE,
     tracking_number VARCHAR(50) NOT NULL,
     estimated_delivery_date DATE,
     special_instructions VARCHAR(255),
@@ -186,6 +185,7 @@ CREATE TABLE FedExShipment(
 -- DHLShipment table
 CREATE TABLE DHLShipment(
     shipment_id INT PRIMARY KEY,
+    order_id INT UNIQUE,
     tracking_number VARCHAR(50) NOT NULL,
     customs_declaration VARCHAR(255),
     delivery_time_window VARCHAR(100),
@@ -206,5 +206,3 @@ CREATE TABLE TelephoneUser(
     user_id INT,
     FOREIGN KEY(user_id) REFERENCES Customer(user_id)
 );
-
-

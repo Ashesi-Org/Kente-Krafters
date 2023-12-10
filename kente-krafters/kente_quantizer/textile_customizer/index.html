@@ -66,12 +66,12 @@
     //Future Image Data Storage
     let imageData;
     // Load the image
-    const imageUrl = 'readymade2_quantized.png';
+    const imageUrl = 'readymade8_quantized.png';
     const image = new Image();
 
     //Ensuring CORS is enabled
     image.crossOrigin = 'Anonymous'; // Enable cross-origin image access
-    image.src = "<%= imageUrl %>";
+    image.src = imageUrl;
 
     image.onload = function () {
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -88,6 +88,8 @@
       const targetColor = [clickedColor[0], clickedColor[1], clickedColor[2]];
       selectedPixels = findPixelsWithColor(targetColor);
     });
+
+
 
     function setChosenColor(color) {
       replacementColor = hexToRgb(color);
@@ -149,6 +151,8 @@
       downloadLink.click();
       document.body.removeChild(downloadLink);
     }
+
+
   </script>
 </body>
 

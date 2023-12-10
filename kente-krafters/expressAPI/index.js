@@ -2,7 +2,7 @@ const PORT = process.env.PORT || 5000;
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -13,17 +13,16 @@ const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
-const textileTemplateRouter = require('./customizeFabric');
 
 //Comment here
 app.use(bodyParser.json());
 app.use(cors()); // Add this line to enable CORS for all routes
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'WovenAfrica',
+    host: '',
+    user: 'wov_dev',
+    password: 'manage3hisPazzOheneba',
+    database: 'wovenafricaglobal',
     port: 3306, // Your MySQL server port (default is 3306)
 });
 connection.connect((err) => {
@@ -44,7 +43,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
 
-
 //Sending database connection to all routes
 app.use((req, res, next) => {
     req.db = connection;
@@ -59,14 +57,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+
 app.get('/customizeFabricView', (req, res) => {
     res.render('customizeFabricView', { /* any data you want to pass to the template */ });
 });
-
-app.get('/CustomizeStoleView', (req, res) => {
-    res.sendFile(__dirname + '/stoleCustomizer.html');
-});
-
 
 // Routers for different parts of application
 app.use(signInRouter);
@@ -75,8 +69,6 @@ app.use(registerRouter);
 app.use(cartRouter);
 app.use(customerProductRouter);
 app.use(customerOrderRouter);
-app.use(textileTemplateRouter);
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
