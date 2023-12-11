@@ -2,7 +2,7 @@ const PORT = process.env.PORT || 5000;
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const mysql = require('mysql2');
+const { Pool } = require('pg');
 const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -18,12 +18,12 @@ const customerOrderRouter = require('./customerOrder');
 app.use(bodyParser.json());
 app.use(cors()); // Add this line to enable CORS for all routes
 
-const connection = mysql.createConnection({
-    host: '',
-    user: 'wov_dev',
-    password: 'manage3hisPazzOheneba',
-    database: 'wovenafricaglobal',
-    port: 3306, // Your MySQL server port (default is 3306)
+const connection = new Pool({
+    host: '127.0.0.1',
+    user: 'postgres',
+    password: 'seeDweiB3g7@#1',
+    database: 'keepup',
+    port: 5432, // Your MySQL server port (default is 3306)
 });
 connection.connect((err) => {
     if (err) {

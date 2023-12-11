@@ -2,21 +2,19 @@ const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
 
-
 //creating a new cart
 router.post('/create-cart', async (req, res) => {
     const connection = req.db;
     try {
-        const {cart_id, customer_id} = req.body;
-        const sql = 'INSERT INTO Cart(cart_id, customer_id) VALUES(?,?)';
-        const result = await connection.query(sql, [cart_id, customer_id]);
+        const {customer_email} = req.body;
+        const sql = 'INSERT INTO Cart(cart_id) VALUES(?)';
+        const result = await connection.query(sql, [customer_email]);
         res.json(result.rows);
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
-
 
 //Adding a product to cart
 router.post('/add-to-cart', async (req, res) => {
@@ -31,7 +29,6 @@ router.post('/add-to-cart', async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
-
 
 
 //RemoveItemFrom Cart
@@ -78,6 +75,7 @@ router.post('/clear-cart', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 router.post('/checkout/cart-id', async (req, res) => {
     const connection = req.db;

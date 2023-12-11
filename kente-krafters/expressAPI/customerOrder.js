@@ -4,14 +4,14 @@ const router = express.Router();
 
 
 //User Views All Orders
-router.get('/customer/:id/orders/:offset', async (req, res) => {
+//Route for viewing orders
+router.get('/customer/merchant-product-orders/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
-        const seller_id = req.params.id;
-        const sql = 'SELECT * FROM ProductOrder WHERE customer_id = $1 ORDER BY date LIMIT 10 OFFSET $2';
-        const result = await connection.query(sql, [customer_id, userProvidedOffset]);
-
+        const customer_email = req.body;
+        const sql = 'SELECT Orders.*, MerchantProductOrder.* FROM Orders JOIN MerchantProductOrder ON Orders.payment_id = MerchantProductOrder.payment_id WHERE Orders.customer_email = $1 ORDER BY Orders.date_created LIMIT 10 OFFSET $2';
+        const result = await connection.query(sql, [customer_email, userProvidedOffset]);
         res.json(result.rows);
     } catch (error) {
         console.error(error);
@@ -19,22 +19,40 @@ router.get('/customer/:id/orders/:offset', async (req, res) => {
     }
 });
 
-//User Views Order Based on status
-router.get('/customer/:id/orders/:status/:offset', async (req, res) => {
+//Getting stole product orders
+router.get('/customer/stole-product-orders/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
-        const customer_id = req.params.id;
-        const order_status = req.params.status;
-        const sql = "SELECT * FROM ProductOrder WHERE customer_id = $1 AND order_status = $2 ORDER BY date LIMIT 10 OFFSET $3";
-        const result = await connection.query(sql, [customer_id, order_status, userProvidedOffset]);
-
+        const customer_email = req.body;
+        const sql = 'SELECT Orders.*, StoleProductOrder.* FROM Orders JOIN StoleProductOrder ON Orders.payment_id = StoleProductOrder.payment_id WHERE Orders.customer_email = $1 ORDER BY Orders.date_created LIMIT 10 OFFSET $2';
+        const result = await connection.query(sql, [customer_email, userProvidedOffset]);
         res.json(result.rows);
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
+
+
+//Getting custom product orders
+router.get('/customer/customfabric-product-orders/:offset', async (req, res) => {
+    try {
+        const connection = req.db;
+        const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
+        const customer_email = req.body;
+        const sql = 'SELECT Orders.*, CustomFabricOrderDetails.* FROM Orders JOIN CustomFabricOrderDetails ON Orders.payment_id = CustomFabricOrderDetails.payment_id WHERE Orders.customer_email = $1 ORDER BY Orders.date_created LIMIT 10 OFFSET $2';
+        const result = await connection.query(sql, [customer_email, userProvidedOffset]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
+
+
+
 
 //Placing an order for a product
 router.post('/order', async (req, res) => {
