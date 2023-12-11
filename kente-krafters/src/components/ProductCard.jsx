@@ -5,6 +5,7 @@ export function ProductCard({
 	price,
 	thumb,
 	currency,
+	trader,
 }) {
 	return (
 		<div className="rounded-lg  bg-card text-card-foreground  w-[334px]">
@@ -39,7 +40,9 @@ export function ProductCard({
 			</div>
 			<div className="py-3">
 				<div className="text-sm text-gray-500">New in</div>
-				<div className="text-lg font-bold">{product_name}</div>
+				<div className="text-lg font-bold">
+					{product_name} by {trader}
+				</div>
 				<div className="text-sm text-gray-500">
 					Available in different colors
 				</div>
