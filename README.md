@@ -1,10 +1,14 @@
 # Introduction
 
-Kente Hub is a web-based platform that serves as a hub for all Kente-related products and services in Ghana. It offers two main functionalities: Customizable graduation stoles and an Online Kente fabric marketplace.
+Woven Web App is a web-based platform that serves as a hub for all Kente-related products and services in Ghana. It offers two main functionalities: Customizable graduation stoles and an Online Kente fabric marketplace.
 
 ## Customizable Graduation Stoles
 
 Kente Hub allows clients to personalize their graduation stoles with popular designs, school or company logos, and their own names. It also integrates seamless online payment processing for a secure transaction process.
+
+## Customizable Kente Pattern Colors
+
+The Woven App empowers users to personalize their Kente fabric by leveraging advanced Machine Learning technology. Users can customize colours to create a truly unique and personalized piece. 
 
 ## Online Kente Fabric Marketplace
 
