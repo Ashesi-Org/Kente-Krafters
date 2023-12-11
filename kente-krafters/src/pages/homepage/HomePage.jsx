@@ -35,6 +35,48 @@ const cardDetails = [
 export default function HomePage() {
 	return (
 		<main className="container ">
+			<Carousel
+				className="container"
+				autoPlay="true"
+				maxHeight="500px"
+				infiniteLoop="true"
+				interval={7000}
+			>
+				<div>
+					<img
+						src="src/assets/carousel_img_1.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Enhance your wedding celebration with our
+						beautiful stoles! 💍✨ Elevate your special day in
+						style. #CherishLove&rdquo;
+					</p>
+				</div>
+				<div>
+					<img
+						src="src/assets/carousel_img_2.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Embrace brotherhood with our premium fabrics!
+						🤝✨ Elevate unity in style. #FabricOfConnection&rdquo;
+					</p>
+				</div>
+				<div>
+					<img
+						src="src/assets/carousel_img_3.jpg"
+						alt=""
+						style={{ maxHeight: "500px", width: "auto" }}
+					/>
+					<p>
+						&ldquo;Elevate your graduation with our stunning stoles!
+						🎓✨ #CelebrateSuccess&rdquo;
+					</p>
+				</div>
+			</Carousel>
 			<h2 className="text-center uppercase mb-8 text-2xl tracking-wider font-semibold">
 				Choose Your Category
 			</h2>
