@@ -1,23 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
+:root {
+  font-family:"ui-monospace", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;;
+  line-height: 1.5;
+  font-weight: 400;
 
-	color: rgb(0, 0, 0);
-	background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
 
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-} */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#top-left-nav a.active {
+  /* color: red; */
+  font-weight: 600;
+}
+
+.fluid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+  grid-gap: 1rem;
+}
+
+.btn {
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+.product {
+  margin-bottom: 8px;
+}
+
+.impact {
+  margin-top: 8px;
+}
+
+.footer {
+  margin-top: 8px;
+}
+
+
+/* checkout */
+.image{
+  background-color: bisque;
+}
+
+.btn{
+  border: 1px solid black;
+}
+
+.wishlist{
+  background-color: #F1F2F1;
+  border: none;
+}
+
+.sizes button:hover, .sizes button:focus{
+  background-color: black;
+  color: white;
+}
+
+
+.quantity-button {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input {
+  width: 40px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.quantity-button button {
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
