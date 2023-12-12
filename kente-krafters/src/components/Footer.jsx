@@ -6,10 +6,10 @@ import Logo from '../assets/logos/woven_logo_2.png';
 const Footer = () => {
 	return (
 		<div className="bg-black text-white py-8">
-		<div className="container flex items-center justify-between text-logo-white mb-12 mt-16">
+		<div className="container flex items-center justify-between text-logo-white mb-6">
 		  {/* Logo Section */}
 		  <div className="flex items-center">
-			<img src={Logo} alt="Your Logo" className="w-52 h-52 mr-8" />
+			<img src={Logo} alt="Your Logo" className="w-32 h-30 mr-4" />
 		  </div>
   
 		  {/* Customer Services Section */}
@@ -62,9 +62,9 @@ const Footer = () => {
 		<div className="container border-t border-logo-gray flex justify-between items-center mt-4 pt-4">
 		  {/* Add your social media logos here */}
 		  <div className="flex">
-			<span className="mr-4">Social Media 1</span>
-			<span className="mr-4">Social Media 2</span>
-			<span className="mr-4">Social Media 3</span>
+			<span className="mr-4">Instagram</span>
+			<span className="mr-4">Facebook</span>
+			<span className="mr-4">Twitter/X</span>
 		  </div>
   
 		  {/* Copyright information */}
