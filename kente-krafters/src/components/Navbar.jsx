@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+	const handleButtonClick = () => {
+		// Replace the following URL with the actual URL you want to navigate to
+		window.location.href = "https://sfv86m.csb.app/";
+	};
 	return (
 		<div className="container">
 			<NavLink to="/">
@@ -71,9 +75,12 @@ const Navbar = () => {
 					<NavLink to="/graduation-stoles" className="my-0.5">
 						Graduation Stoles
 					</NavLink>
-					<NavLink to="/gifts" className="my-0.5">
-						Gifts and decoration
-					</NavLink>
+					<a
+						className=" text-black px-4 py-2 rounded-md cursor-pointer"
+						onClick={handleButtonClick}
+					>
+						Kente Customization
+					</a>
 					<NavLink to="/AboutUs" className="my-0.5">
 						About Us
 					</NavLink>
