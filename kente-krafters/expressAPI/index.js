@@ -17,18 +17,11 @@ const sellerOrderRouter = require('./sellerOrder');
 const recordPayment = require('./recordPayment');
 const sellerProductRouter = require('./sellerProduct');
 const apiKey = 'secret3gusiMystery'; 
-// Middleware to check for a valid API key
-const authenticateAPIKey = (req, res, next) => {
-  const key = req.header('Authorization');
-  if (!key || key !== apiKey) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-  next();
-};
 
+
+// Middleware to check for a valid API key
 app.use(bodyParser.json());
 app.use(cors()); 
-app.use(authenticateAPIKey);
 
 const connection = new Pool({
     host: '127.0.0.1',
@@ -72,6 +65,19 @@ app.use(sellerOrderRouter);
 app.use(recordPayment);
 app.use(sellerProductRouter);
 
+
+app.get('/', async (req, res) => {
+    try {
+      const client = await connection.connect();
+      const result = await client.query('SELECT * FROM Product');
+      const products = result.rows;
+      client.release();
+      res.json(products);
+    } catch (error) {
+      console.error('Error executing query', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.listen(PORT, () => {
