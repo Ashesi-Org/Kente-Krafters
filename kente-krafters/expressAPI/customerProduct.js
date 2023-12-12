@@ -8,9 +8,8 @@ router.get('/products/rows/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
-        const sql = 'SELECT * FROM product ORDER BY date LIMIT 10 OFFSET $1';
+        const sql = 'SELECT * FROM Product ORDER BY date LIMIT 10 OFFSET $1';
         const result = await connection.query(sql, [userProvidedOffset]);
-
         res.json(result.rows);
     } catch (error) {
         console.error(error);
@@ -54,9 +53,9 @@ router.get('/customfabrics/rows/:offset', async (req, res) => {
 //User views a single product
 router.get('/product/:id', (req, res) => {
     const connection = req.db;
-    const studentId = req.params.id;
-    const sql = 'SELECT * FROM Product WHERE id = ?';
-    connection.query(sql, [studentId], (err, result) => {
+    const productId = req.params.id;
+    const sql = 'SELECT * FROM Product WHERE product_id = ?';
+    connection.query(sql, [productId], (err, result) => {
         if (err) {
             console.error('Error executing SQL query:', err);
             res.status(500).send('Internal Server Error');
@@ -70,13 +69,12 @@ router.get('/product/:id', (req, res) => {
     });
 });
 
-
 //Fetch the stoles
 router.get('/stoles/:id', (req, res) => {
     const connection = req.db;
     const stoleId = req.params.id;
     // SQL query to fetch a student by ID
-    const sql = 'SELECT * FROM StoleProduct WHERE id = ?';
+    const sql = 'SELECT * FROM StoleProduct WHERE stole_product_id = ?';
 
     connection.query(sql, [stoleId], (err, result) => {
         if (err) {
@@ -97,7 +95,7 @@ router.get('/stoles/:id', (req, res) => {
 router.get('/customfabric/:id', (req, res) => {
     const connection = req.db;
     const customFabricId = req.params.id;
-    const sql = 'SELECT * FROM CustomFabricProduct WHERE id = ?';
+    const sql = 'SELECT * FROM CustomFabricProduct WHERE custom_fabric_product_id = ?';
 
     connection.query(sql, [customFabricId], (err, result) => {
         if (err) {
@@ -113,16 +111,14 @@ router.get('/customfabric/:id', (req, res) => {
     });
 });
 
-
+//View Seller by product
 router.get('/seller/:id/products/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
-        const seller_id = req.params.id;
-        const sql = 'SELECT * FROM seller WHERE seller_id = $1 ORDER BY date LIMIT 10 OFFSET $2';
-        const result = await connection.query(sql, [seller_id, userProvidedOffset]);
-
-
+        const seller_email = req.params.id;
+        const sql = 'SELECT * FROM Product WHERE seller_email = $1 ORDER BY date LIMIT 10 OFFSET $2';
+        const result = await connection.query(sql, [seller_email, userProvidedOffset]);
         res.json(result.rows);
     } catch (error) {
         console.error(error);

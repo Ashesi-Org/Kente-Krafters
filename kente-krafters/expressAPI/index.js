@@ -13,10 +13,22 @@ const registerRouter = require('./register');
 const cartRouter = require('./cart');
 const customerProductRouter = require('./customerProduct');
 const customerOrderRouter = require('./customerOrder');
+const sellerOrderRouter = require('./sellerOrder');
+const recordPayment = require('./recordPayment');
+const sellerProductRouter = require('./sellerProduct');
+const apiKey = 'secret3gusiMystery'; 
+// Middleware to check for a valid API key
+const authenticateAPIKey = (req, res, next) => {
+  const key = req.header('Authorization');
+  if (!key || key !== apiKey) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+  next();
+};
 
-//Comment here
 app.use(bodyParser.json());
-app.use(cors()); // Add this line to enable CORS for all routes
+app.use(cors()); 
+app.use(authenticateAPIKey);
 
 const connection = new Pool({
     host: '127.0.0.1',
@@ -49,19 +61,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-// Use express-session middleware
-app.use(session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true
-}));
-
-
-app.get('/customizeFabricView', (req, res) => {
-    res.render('customizeFabricView', { /* any data you want to pass to the template */ });
-});
-
 // Routers for different parts of application
 app.use(signInRouter);
 app.use(signOutRouter);
@@ -69,6 +68,11 @@ app.use(registerRouter);
 app.use(cartRouter);
 app.use(customerProductRouter);
 app.use(customerOrderRouter);
+app.use(sellerOrderRouter);
+app.use(recordPayment);
+app.use(sellerProductRouter);
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

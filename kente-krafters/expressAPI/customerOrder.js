@@ -2,10 +2,8 @@ const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
 
-
-//User Views All Orders
 //Route for viewing orders
-router.get('/customer/merchant-product-orders/:offset', async (req, res) => {
+router.get('/customer/merchant-order/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
@@ -20,7 +18,7 @@ router.get('/customer/merchant-product-orders/:offset', async (req, res) => {
 });
 
 //Getting stole product orders
-router.get('/customer/stole-product-orders/:offset', async (req, res) => {
+router.get('/customer/stole-order/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
@@ -36,7 +34,7 @@ router.get('/customer/stole-product-orders/:offset', async (req, res) => {
 
 
 //Getting custom product orders
-router.get('/customer/customfabric-product-orders/:offset', async (req, res) => {
+router.get('/customer/customfabric-order/:offset', async (req, res) => {
     try {
         const connection = req.db;
         const userProvidedOffset = parseInt(req.params.offset, 10) || 0;
@@ -50,31 +48,27 @@ router.get('/customer/customfabric-product-orders/:offset', async (req, res) => 
     }
 });
 
-
-
-
-
 //Placing an order for a product
-router.post('/order', async (req, res) => {
+router.post('/customer/order', async (req, res) => {
     try {
         const connection = req.db;
         const {
-            cart_id,
-            customer_id,
-            seller_id,
             payment_id,
+            customer_email,
             country,
             postal_code,
             delivery_address,
-            delivery_method_id,
-            quantity,
-            product_id,
-            unit_price,
+            delivery_method,
             total_price
         } = req.body;
-        const currentDatetime = new Date().toISOString();
-        const sql = 'INSERT INTO ProductOrder(cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, order_status, quantity, product_id, unit_price, total_price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
-        const result = await connection.query(sql, [cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, 'pending', quantity, product_id, unit_price, total_price]);
+        const sql = 'INSERT INTO Orders(payment_id, customer_email, country, postal_code, delivery_address, delivery_method, total_price) VALUES(?,?,?,?,?,?,?)';
+        const result = await connection.query(sql, [ payment_id,
+            customer_email,
+            country,
+            postal_code,
+            delivery_address,
+            delivery_method,
+            total_price]);
         res.json(result.rows);
     } catch (error) {
         console.error(error);
@@ -83,82 +77,83 @@ router.post('/order', async (req, res) => {
 });
 
 
-//Placing an order for a stole
-router.post('/order/stole', async (req, res) => {
-    const connection = req.db;
-    const {
-        cart_id,
-        customer_id,
-        seller_id,
-        payment_id,
-        country,
-        postal_code,
-        delivery_address,
-        delivery_method_id,
-        quantity, product_id, unit_price, total_price,
-        color, width, height, logo_link, final_design_link
-    } = req.body;
-    const OrderInsertQuery = 'INSERT INTO ProductOrder(cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, order_status, quantity, product_id, unit_price, total_price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)'
-    const OrderInsertParams = [cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, 'pending', quantity, product_id, unit_price, total_price];
-    connection.query(OrderInsertQuery, OrderInsertParams, (err, orderResults) => {
-        if (err) {
-            return connection.rollback(() => {
-                res.status(500).json({error: 'Error inserting into user table'});
-            });
-        }
-        const OrderId = orderResults.insertId;
-        const stoleOrderInsertQuery = 'INSERT INTO StoleOrderDetails(order_id, color, width, height, logo_link, final_design_link) VALUES (?, ?, ?,?,?,?)';
-        const stoleOrderInsertParams = [OrderId, color, width, height, logo_link, final_design_link];
-        connection.query(stoleOrderInsertQuery, stoleOrderInsertParams, (err) => {
-            if (err) {
-                return connection.rollback(() => {
-                    res.status(500).json({error: 'Error inserting into customer table'});
-                });
-            } else {
-                res.status(201).send('Customer registered successfully');
-            }
-        });
-    });
-});
-
-//Placing an order for a custom fabric
-router.post('/order/custom-fabric', async (req, res) => {
-    const connection = req.db;
-    const {
-        cart_id,
-        customer_id,
-        seller_id,
-        payment_id,
-        country,
-        postal_code,
-        delivery_address,
-        delivery_method_id,
-        quantity, product_id, unit_price, total_price,
-        texture, final_design_link, width, height
-    } = req.body;
-    const OrderInsertQuery = 'INSERT INTO ProductOrder(cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, order_status, quantity, product_id, unit_price, total_price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)'
-    const OrderInsertParams = [cart_id, customer_id, seller_id, payment_id, country, postal_code, delivery_address, delivery_method_id, 'pending', quantity, product_id, unit_price, total_price];
-    connection.query(OrderInsertQuery, OrderInsertParams, (err, orderResults) => {
-        if (err) {
-            return connection.rollback(() => {
-                res.status(500).json({error: 'Error inserting into order table'});
-            });
-        }
-        const OrderId = orderResults.insertId;
-        const CustomFabricOrderInsertQuery = 'INSERT INTO CustomFabricOrderDetails(order_id, texture, final_design_link, width, height) VALUES (?, ?, ?,?,?)';
-        const CustomFabricOrderInsertParams = [OrderId, texture, final_design_link, width, height];
-        connection.query(CustomFabricOrderInsertQuery, CustomFabricOrderInsertParams, (err) => {
-            if (err) {
-                return connection.rollback(() => {
-                    res.status(500).json({error: 'Error inserting into custom fabric table'});
-                });
-            } else {
-                res.status(201).send('Fabric order placed successfully');
-            }
-        });
-    });
+//Setting an order for a particular merchant's product
+router.post('customer/merchant-order', async (req, res) => {
+    try {
+        const connection = req.db;
+        const {
+            payment_id,
+            product_id,
+            product_total,
+            quantity,
+            seller_fulfilled,
+            delivery_status,
+            tracking_id,
+            order_status
+        } = req.body;
+        const sql = 'INSERT INTO MerchantProductOrder(payment_id,product_id, product_total,quantity, seller_fulfilled, delivery_status, tracking_id, order_status) VALUES(?,?,?,?,?,?,?,?)';
+        const result = await connection.query(sql, [payment_id,product_id, product_total,quantity, seller_fulfilled, delivery_status, tracking_id, order_status]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
 });
 
 
+//Setting order for a particular stole
+router.post('customer/stole-order', async (req, res) => {
+    try {
+        const connection = req.db;
+        const {
+            payment_id,
+            quantity,
+            color,
+            logo_link,
+            final_design_link,
+            delivery_status,
+            tracking_id,
+            order_status
+        } = req.body;
+        const sql = 'INSERT INTO StoleProductOrder(payment_id, quantity, color, logo_link, final_design_link, delivery_status, tracking_id, order_status) VALUES(?,?,?,?,?,?,?,?)';
+        const result = await connection.query(sql, [payment_id,
+            quantity,
+            color,
+            logo_link,
+            final_design_link,
+            delivery_status,
+            tracking_id,
+            order_status]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
+
+//Setting order details for custom-fabric
+router.post('customer/customfabric-order', async (req, res) => {
+    try {
+        const connection = req.db;
+        const {
+            payment_id,
+            product_total,
+            final_design_link,
+            yards,
+            delivery_status,
+            tracking_id,
+            order_status
+        } = req.body;
+        const sql = 'INSERT INTO CustomFabricOrderDetails(payment_id,product_total,final_design_link, yards, delivery_status, tracking_id, order_status) VALUES(?,?,?,?,?,?,?)';
+        const result = await connection.query(sql, [payment_id,product_total,final_design_link, yards, delivery_status,
+            tracking_id,
+            order_status]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
 //Removing a product
 module.exports = router;
