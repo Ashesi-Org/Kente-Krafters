@@ -1,3 +1,10 @@
+/**
+ * The GraduationStoles function renders a list of ProductCard components and a button that redirects
+ * to a website when clicked.
+ * @returns The GraduationStoles component is returning a JSX fragment. It includes a div with the
+ * className "fluid-grid" that maps over the PRODUCTS array and renders a ProductCard component for
+ * each product.
+ */
 import { PRODUCTS } from "../utils/data";
 import { ProductCard } from "../components/ProductCard";
 

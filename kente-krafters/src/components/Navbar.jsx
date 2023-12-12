@@ -1,3 +1,7 @@
+/**
+ * The above code is a React component that represents a navigation bar with various links and a search
+ * input field.
+ */
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {

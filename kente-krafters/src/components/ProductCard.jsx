@@ -1,3 +1,9 @@
+/**
+ * The `ProductCard` function is a React component that renders a card displaying product information
+ * such as name, description, price, and trader.
+ * @returns The ProductCard component is returning a JSX element, which represents the structure and
+ * content of the product card.
+ */
 export function ProductCard({
 	id,
 	product_name,
