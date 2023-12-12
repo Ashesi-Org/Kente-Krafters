@@ -1,5 +1,6 @@
 # Kente-Krafters
-All current code and documentation are in the `development` branch of the repository. Navigate there to find all development files and folders.
+All current code is in the `development` branch of the repository. Navigate there to find all development files and folders.
+The documentation with the justification of technologies utilized is [here](https://github.com/Ashesi-Org/Kente-Krafters/blob/main/Kente%20E-Commerce%20and%20Pattern%20Storage%20System.pdf)
 
 # Introduction
 
