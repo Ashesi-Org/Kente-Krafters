@@ -1,3 +1,7 @@
+/**
+ * The CategoryCard component is a reusable React component that displays an image, heading, and
+ * caption with the provided props.
+ */
 import PropTypes from "prop-types";
 
 const CategoryCard = ({ id, link, src, alt, heading, caption }) => {

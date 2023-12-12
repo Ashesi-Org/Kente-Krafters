@@ -1,3 +1,8 @@
+/**
+ * The PaystackIntegration component is a form that allows users to enter their email, amount, first
+ * name, and last name, and submit a payment using the Paystack API.
+ * @returns The PaystackIntegration component is being returned.
+ */
 import { useState } from "react";
 import PaystackPop from "@paystack/inline-js";
 

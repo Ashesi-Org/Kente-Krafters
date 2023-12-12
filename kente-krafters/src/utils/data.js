@@ -1,3 +1,8 @@
+/* The code snippet is exporting a constant variable named `PRODUCTS`. This variable is an array of
+objects, where each object represents a product. Each product object has properties such as `id`,
+`product_name`, `description`, `trader`, `price`, `currency`, and `thumb`. These properties provide
+information about each product, such as its unique identifier, name, description, trader, price,
+currency, and thumbnail image source. */
 export const PRODUCTS = [
 	{
 		id: 1,
