@@ -11,7 +11,7 @@ import AboutUs from "./pages/AboutUs";
 import ValuesAndVisions from "./pages/Values-visions";
 import CheckOut from "./pages/checkout";
 import PaystackIntegration from "./pages/paystack";
-import WelcomePage from "./pages/welcome";
+import Lnding from "./pages/welcome";
 
 export default function App() {
   return (
