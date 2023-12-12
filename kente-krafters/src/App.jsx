@@ -14,36 +14,39 @@ import PaystackIntegration from "./pages/paystack";
 import WelcomePage from "./pages/welcome";
 
 export default function App() {
-  return (
-    <Routes>
-      <Route path="/">
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Route>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="kente" element={<KenteShopping />} />
-        <Route path="graduation-stoles" element={<GraduationStoles />} />
-        <Route path="gifts" element={<Gifts />} />
-        <Route path = "AboutUs" element = {<AboutUs/>}/>
-        <Route path = "Values-visions" element = {<ValuesAndVisions/>}/>
-        <Route path = "checkout" element = {<CheckOut/>}/>
-        <Route path = "paystack" element = {<PaystackIntegration/>}/>
-      </Route>
-    </Routes>
-  );
+	return (
+		<Routes>
+			<Route path="/">
+				<Route path="login" element={<Login />} />
+				<Route path="register" element={<Register />} />
+			</Route>
+			<Route path="/" element={<Layout />}>
+				<Route index element={<HomePage />} />
+				<Route path="kente" element={<KenteShopping />} />
+				<Route
+					path="graduation-stoles"
+					element={<GraduationStoles />}
+				/>
+				<Route path="gifts" element={<Gifts />} />
+				<Route path="AboutUs" element={<AboutUs />} />
+				<Route path="Values-visions" element={<ValuesAndVisions />} />
+				<Route path="checkout" element={<CheckOut />} />
+				<Route path="paystack" element={<PaystackIntegration />} />
+			</Route>
+		</Routes>
+	);
 }
 
 function Layout() {
-  return (
-    <div>
-      <Navbar />
+	return (
+		<div>
+			<Navbar />
 
-      <div className="container py-10">
-        <Outlet />
-      </div>
+			<div className="container py-10">
+				<Outlet />
+			</div>
 
-      <Footer />
-    </div>
-  );
+			<Footer />
+		</div>
+	);
 }

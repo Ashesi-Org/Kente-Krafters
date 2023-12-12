@@ -40,7 +40,7 @@ export default function HomePage() {
 				autoPlay="true"
 				maxHeight="500px"
 				infiniteLoop="true"
-				interval={7000}
+				interval={5000}
 			>
 				<div>
 					<img
