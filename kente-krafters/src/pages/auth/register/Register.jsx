@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Register = () => {
 	return (
 		<div className="container">
@@ -71,9 +73,7 @@ const Register = () => {
 
 					<div className="text-center max-w-md">
 						<p className="inline">Already have an account?&nbsp;</p>
-						<a href="/" className="text-black font-semibold">
-							Login
-						</a>
+						<NavLink to="/login">Login</NavLink>
 					</div>
 				</div>
 

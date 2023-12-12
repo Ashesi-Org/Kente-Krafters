@@ -37,15 +37,15 @@ export default function App() {
 }
 
 function Layout() {
-  return (
-    <div>
-      <Navbar />
+	return (
+		<div>
+			<Navbar />
 
-      <div className="container py-10">
-        <Outlet />
-      </div>
+			<div className="container py-10">
+				<Outlet />
+			</div>
 
-      <Footer />
-    </div>
-  );
+			<Footer />
+		</div>
+	);
 }
