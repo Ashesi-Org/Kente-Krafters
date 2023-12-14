@@ -11,16 +11,20 @@
       width: 100%;
       height: 100%;
       overflow-x: hidden;
+      box-sizing: border-box;
     }
 
     body {
       padding: 1em;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
     }
 
     #addToCartButton {
-      width: 10em;
-      height: 4em;
-      background-color: #4CAF50;
+      width: 8em;
+      height: 3em;
+      background-color: black;
       color: white;
       border: none;
       border-radius: 5px;
@@ -28,12 +32,18 @@
       font-size: 16px;
     }
 
+    select {
+      width: 7em;
+    }
+
     .color-circle {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       margin-right: 10px;
       cursor: pointer;
+      border-color: lightgray;
+      border-style: solid;
     }
 
     .pallete {
@@ -42,20 +52,57 @@
       padding-top: 1em;
       padding-bottom: 1em;
     }
+
+    .rightSide {
+      display: flex;
+      padding-left: 1em;
+      flex-direction: column;
+      padding-right: 1em;
+      width: 40%;
+      gap: 0.5em;
+    }
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Three columns with equal width */
+      grid-gap: 20px;
+      gap: 0.5em;
+    }
   </style>
 </head>
 
 <body>
   <canvas id="imageCanvas" width="500" height="500" style="border:1px solid #000;"></canvas>
-  <div class="pallete">
-    <div class="color-circle" style="background-color: red;" onclick="setChosenColor('#FF0000')"></div>
-    <div class="color-circle" style="background-color: orange;" onclick="setChosenColor('#FFA500')"></div>
-    <div class="color-circle" style="background-color: yellow;" onclick="setChosenColor('#FFFF00')"></div>
-    <div class="color-circle" style="background-color: indigo;" onclick="setChosenColor('#4B0082')"></div>
-    <div class="color-circle" style="background-color: blue;" onclick="setChosenColor('#0000FF')"></div>
-    <div class="color-circle" style="background-color: violet;" onclick="setChosenColor('#EE82EE')"></div>
+  <div class=rightSide>
+    <div>Click on a shape, and then a color</div>
+    <div class="pallete">
+      <div class="color-circle" style="background-color: red;" onclick="setChosenColor('#FF0000')"></div>
+      <div class="color-circle" style="background-color: orange;" onclick="setChosenColor('#FFA500')"></div>
+      <div class="color-circle" style="background-color: yellow;" onclick="setChosenColor('#FFFF00')"></div>
+      <div class="color-circle" style="background-color: indigo;" onclick="setChosenColor('#4B0082')"></div>
+      <div class="color-circle" style="background-color: blue;" onclick="setChosenColor('#0000FF')"></div>
+      <div class="color-circle" style="background-color: violet;" onclick="setChosenColor('#EE82EE')"></div>
+    </div>
+
+    <p id="unitPrice"> Unit Price: <%=price%> </p>
+    <p>Total Price Here</p>
+    <form>
+      <label for="dropdown1">Select option 1:</label>
+      <select id="dropdown1" name="dropdown1">
+        <option value="option1">Option 1A</option>
+        <option value="option2">Option 1B</option>
+        <option value="option3">Option 1C</option>
+      </select>
+
+      <label for="dropdown2">Select option 2:</label>
+      <select id="dropdown2" name="dropdown2">
+        <option value="option4">Option 2A</option>
+        <option value="option5">Option 2B</option>
+        <option value="option6">Option 2C</option>
+      </select>
+    </form>
+    <button id="addToCartButton">Place Order</button>
   </div>
-  <button id="addToCartButton">Add to Cart</button>
+
 
   <script>
     //Declaring the canvas ready
@@ -66,12 +113,11 @@
     //Future Image Data Storage
     let imageData;
     // Load the image
-    const imageUrl = 'readymade2_quantized.png';
     const image = new Image();
 
     //Ensuring CORS is enabled
     image.crossOrigin = 'Anonymous'; // Enable cross-origin image access
-    image.src = "<%= imageUrl %>";
+    image.src = "<%= imageUrl %>"
 
     image.onload = function () {
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -151,5 +197,4 @@
     }
   </script>
 </body>
-
 </html>
