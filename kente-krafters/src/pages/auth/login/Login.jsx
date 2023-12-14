@@ -37,6 +37,10 @@ const Login = () => {
 			)
 			.then((response) => {
 				console.log(response);
+				if (response == true) {
+					// redirect to the homepage
+					window.location.href = "/";
+				}
 			});
 	};
 
@@ -106,6 +110,13 @@ const Login = () => {
 								/>
 								Sign Up With Google
 							</button>
+							{/* <GoogleLogin
+								clientId="993745405896-vcffp2398e8455i3454j353010lu86gq.apps.googleusercontent.com"
+								buttonText="Login with Google"
+								onSuccess={responseGoogle}
+								onFailure={responseGoogle}
+								cookiePolicy={"single_host_origin"}
+							/> */}
 						</div>
 
 						<div className="text-center">

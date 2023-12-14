@@ -1,6 +1,52 @@
 import { NavLink } from "react-router-dom";
+import { baseEndPoint } from "../../../../expressAPI/data";
 
 const Register = () => {
+	const handleRegisterSubmit = (e) => {
+		e.preventDefault();
+
+		// obtain the first name, last name, email address, and password from the form
+		const first_name = e.target[0].value;
+		const last_name = e.target[1].value;
+		const email = e.target[2].value;
+		const user_password = e.target[3].value;
+
+		// send the first name, last name, email address, and password to the backend
+		fetch(baseEndPoint + "sign-up", {
+			// declare the method
+			method: "POST",
+
+			// declare the headers
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			// declare the body
+			body: JSON.stringify({
+				first_name,
+				last_name,
+				email,
+				user_password,
+			}),
+
+			// convert the response to JSON
+		})
+			.then(
+				(response) => {
+					return response.json();
+				}
+
+				// log the response
+			)
+			.then((response) => {
+				console.log(response);
+				if (response == true) {
+					// redirect to the homepage
+					window.location.href = "/login";
+				}
+			});
+	};
+
 	return (
 		<div className="container">
 			<div>
