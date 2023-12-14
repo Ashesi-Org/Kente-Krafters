@@ -1,22 +1,33 @@
-/**
- * The GraduationStoles function renders a list of ProductCard components and a button that redirects
- * to a website when clicked.
- * @returns The GraduationStoles component is returning a JSX fragment. It includes a div with the
- * className "fluid-grid" that maps over the PRODUCTS array and renders a ProductCard component for
- * each product.
- */
-import { PRODUCTS } from "../utils/data";
+import { useState, useEffect } from "react";
 import { ProductCard } from "../components/ProductCard";
+import { baseEndPoint } from "../../expressAPI/data";
+import axios from "axios";
 
 export default function GraduationStoles() {
 	const handleButtonClick = () => {
 		window.location.href =
 			"https://6576593962d11507416a7e96--spiffy-phoenix-61e583.netlify.app/";
 	};
+
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			try {
+				const response = await axios.get(baseEndPoint);
+				setProducts(response.data);
+			} catch (error) {
+				console.error("Error fetching products:", error);
+			}
+		};
+
+		fetchProducts();
+	}, []);
+
 	return (
 		<>
 			<div className="fluid-grid">
-				{PRODUCTS.map((product) => (
+				{products.map((product) => (
 					<ProductCard key={product.id} {...product} />
 				))}
 			</div>

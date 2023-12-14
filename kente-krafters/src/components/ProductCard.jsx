@@ -9,15 +9,15 @@ export function ProductCard({
 	product_name,
 	description,
 	price,
-	thumb,
+	image_link,
 	currency,
-	trader,
+	seller_email,
 }) {
 	return (
 		<div className="rounded-lg  bg-card text-card-foreground  w-[334px]">
 			<div className="flex flex-col space-y-1.5">
 				<img
-					src={thumb}
+					src={image_link}
 					alt={product_name}
 					className="w-full h-auto object-cover"
 					width="334"
@@ -47,14 +47,12 @@ export function ProductCard({
 			<div className="py-3">
 				<div className="text-sm text-gray-500">New in</div>
 				<div className="text-lg font-bold">
-					{product_name} by {trader}
+					{product_name} by&nbsp;{seller_email}
 				</div>
 				<div className="text-sm text-gray-500">
-					Available in different colors
+					{description}
 				</div>
-				<div className="text-lg font-bold">
-					{currency} {price}
-				</div>
+				<div className="text-lg font-bold">${price}</div>
 			</div>
 		</div>
 	);
