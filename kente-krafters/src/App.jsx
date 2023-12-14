@@ -28,7 +28,7 @@ export default function App() {
 				/>
 				<Route path="AboutUs" element={<AboutUs />} />
 				<Route path="Values-visions" element={<ValuesAndVisions />} />
-				<Route path="checkout" element={<CheckOut />} />
+				<Route path="checkout/:orderID" element={<CheckOut />} />
 				<Route path="paystack" element={<PaystackIntegration />} />
 				<Route path="welcome" element={<Landing />} />
 				<Route path="HomePage" element={<HomePage />} />
