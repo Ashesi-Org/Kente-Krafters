@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { baseEndPoint } from "../../../../expressAPI/data";
+import login_page_hero from "../../../assets/hero_page_img.png";
+import google_logo from "../../../assets/logos/google.png";
 
 const Login = () => {
 	const handleLoginSubmit = (e) => {
@@ -57,7 +59,7 @@ const Login = () => {
 				<div className="flex min-h-screen justify-center gap-16">
 					<div className="flex-1 justify-center">
 						<img
-							src="src/assets/hero_page_img.png"
+							src={login_page_hero}
 							alt=""
 							className="w mx-auto"
 						/>
@@ -104,7 +106,7 @@ const Login = () => {
 						<div className="flex flex-col space-y-2 mb-3.5">
 							<button className="bg-gray-300 px-4 py-2 rounded-lg border text-black">
 								<img
-									src="src/assets/logos/google.png"
+									src={google_logo}
 									alt=""
 									className="w-6 mr-2 inline-block"
 								/>
