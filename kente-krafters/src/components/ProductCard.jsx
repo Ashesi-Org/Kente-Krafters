@@ -21,8 +21,7 @@ export function ProductCard({
 		>
 			<div className="flex flex-col space-y-1.5">
 				<img
-					// src={image}
-					src={"../assets/product_images/" + product_id + ".jpeg"}
+					src={image_link}
 					alt={product_name}
 					className="w-full h-auto object-cover"
 					width="334"
