@@ -2,36 +2,63 @@
  * The CheckOut component is a React component that displays information about a product and allows the
  * user to select the size and quantity of the product and add it to their cart.
  */
-import React from "react";
-import { PRODUCTS } from "../utils/data";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import heroImage from "../assets/hero_page_img.png";
+import { baseEndPoint } from "../../expressAPI/data";
 
 const CheckOut = () => {
+	// get the product id from the header parameters from the url
+	const productId = window.location.pathname.split("/")[2];
+	// get the product data from the backend
+	const [product, setProduct] = useState({});
+	useEffect(() => {
+		// fetch the product data from the backend
+		const fetchProduct = async () => {
+			try {
+				const response = await axios.get(
+					`${baseEndPoint}product/${productId}`
+				);
+				const responseData =
+					typeof response.data === "string"
+						? JSON.parse(response.data)
+						: response.data;
+				setProduct(responseData);
+			} catch (error) {
+				console.error("Error fetching product:", error);
+			}
+		};
+
+		fetchProduct();
+	}, [productId]); // Only include productId in the dependency array, not product
+
 	return (
 		<div className="max-w-screen-md mx-auto p-8 row">
 			<div className="col-md-4 image">
-				<img
-					className="object-cover w-full h-48"
-					src={heroImage}
-					alt="Woven Kente Graduation Stole"
-				/>
+				{product && (
+					<img
+						className="object-cover w-full h-48"
+						src={product[0].image_link}
+						alt={product[0].name}
+					/>
+				)}
 			</div>
 			<main className="col-md-8">
 				<header>
 					<h1 className="text-2xl font-bold">
-						Woven Kente Graduation Stole
+						{product && product[0].product_name}
 					</h1>
 					<p className="text-gray-600">
 						Graduation Stoles, Gifts, and Decoration
 					</p>
 				</header>
 				<section className="product">
-					<h2 className="text-2xl font-semibold mt-4">$ 300</h2>
-					{/* <p className="text-gray-600">
-            This beautifully woven kente graduation stole is the perfect way to
-            celebrate your graduation day. It is made from high-quality materials.
-          </p> */}
+					<h2 className="text-2xl font-semibold mt-4">
+						$ {product && product[0].price}
+					</h2>
+					<p className="text-gray-600">
+						{product && product[0].description}
+					</p>
 					<div className="pt-4 sizes">
 						<div className="text-gray-600">size</div>
 						<button className="btn bg-white-500 text-black mt-2 mr-1">
@@ -63,7 +90,7 @@ const CheckOut = () => {
 									type="text"
 									id="quantity"
 									className="quantity-input"
-									value="1"
+									defaultValue="1"
 								></input>
 								<button id="increment" className="btn">
 									+
@@ -80,7 +107,7 @@ const CheckOut = () => {
 				</section>
 			</main>
 
-			<script src="../increment.js"></script>
+			<script src="src/increment.js"></script>
 		</div>
 	);
 };
