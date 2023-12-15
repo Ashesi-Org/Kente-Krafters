@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 export default function KenteShopping() {
 	const handleButtonClick = () => {
-		window.location.href = "https://sfv86m.csb.app/";
+		window.location.href = "https://wa.od2022.repl.co/";
 	};
 
 	const [products, setProducts] = useState([]);

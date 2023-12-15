@@ -6,9 +6,14 @@ import { NavLink } from "react-router-dom";
 import Logo from "../assets/logos/woven_logo_2.png";
 
 const Navbar = () => {
-	const handleButtonClick = () => {
+	const handleKenteClick = () => {
 		// Replace the following URL with the actual URL you want to navigate to
-		window.location.href = "https://sfv86m.csb.app/";
+		window.location.href = "https://wa.od2022.repl.co/";
+	};
+
+	const handleStoleClick = () => {
+		window.location.href =
+			"https://6576593962d11507416a7e96--spiffy-phoenix-61e583.netlify.app/";
 	};
 	return (
 		<div className="container">
@@ -73,12 +78,15 @@ const Navbar = () => {
 					<NavLink to="/kente" className="my-0.5">
 						Kente Shopping
 					</NavLink>
-					<NavLink to="/graduation-stoles" className="my-0.5">
-						Graduation Stoles
-					</NavLink>
 					<a
 						className=" text-black px-4 py-2 rounded-md cursor-pointer"
-						onClick={handleButtonClick}
+						onClick={handleStoleClick}
+					>
+						Graduation Stoles
+					</a>
+					<a
+						className=" text-black px-4 py-2 rounded-md cursor-pointer"
+						onClick={handleKenteClick}
 					>
 						Kente Customization
 					</a>
