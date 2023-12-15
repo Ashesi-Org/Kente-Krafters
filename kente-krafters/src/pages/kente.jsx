@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { baseEndPoint } from "../../expressAPI/data";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 export default function KenteShopping() {
 	const handleButtonClick = () => {
@@ -27,7 +28,12 @@ export default function KenteShopping() {
 		<>
 			<div className="fluid-grid">
 				{products.map((product) => (
-					<ProductCard key={product.id} {...product} />
+					<NavLink
+						key={product.product_id}
+						to={`/checkout/${product.product_id}`}
+					>
+						<ProductCard key={product.product_id} {...product} />
+					</NavLink>
 				))}
 			</div>
 			<div className="flex justify-center mt-20">

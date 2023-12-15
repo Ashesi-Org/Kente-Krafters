@@ -10,12 +10,32 @@ import { baseEndPoint } from "../../expressAPI/data";
 const CheckOut = () => {
 	// get the product id from the header parameters from the url
 	const productId = window.location.pathname.split("/")[2];
+
 	// get the product data from the backend
 	const [product, setProduct] = useState({});
+	// useEffect(() => {
+	// 	// fetch the product data from the backend
+	// 	const fetchProduct = async () => {
+	// 		try {
+	// 			const response = await axios.get(
+	// 				`${baseEndPoint}product/${productId}`
+	// 			);
+	// 			const responseData =
+	// 				typeof response.data === "string"
+	// 					? JSON.parse(response.data)
+	// 					: response.data;
+	// 			setProduct(responseData);
+	// 		} catch (error) {
+	// 			console.error("Error fetching product:", error);
+	// 		}
+	// 	};
+
+	// 	fetchProduct();
+	// },
 	useEffect(() => {
-		// fetch the product data from the backend
 		const fetchProduct = async () => {
 			try {
+				console.log("Fetching product with ID:", productId);
 				const response = await axios.get(
 					`${baseEndPoint}product/${productId}`
 				);
@@ -35,7 +55,7 @@ const CheckOut = () => {
 	return (
 		<div className="max-w-screen-md mx-auto p-8 row">
 			<div className="col-md-4 image">
-				{product && (
+				{product && product[0] && (
 					<img
 						className="object-cover w-full h-48"
 						src={product[0].image_link}
@@ -46,7 +66,7 @@ const CheckOut = () => {
 			<main className="col-md-8">
 				<header>
 					<h1 className="text-2xl font-bold">
-						{product && product[0].product_name}
+						{product && product[0] && product[0].product_name}
 					</h1>
 					<p className="text-gray-600">
 						Graduation Stoles, Gifts, and Decoration
@@ -54,10 +74,10 @@ const CheckOut = () => {
 				</header>
 				<section className="product">
 					<h2 className="text-2xl font-semibold mt-4">
-						$ {product && product[0].price}
+						$ {product && product[0] && product[0].price}
 					</h2>
 					<p className="text-gray-600">
-						{product && product[0].description}
+						{product && product[0] && product[0].description}
 					</p>
 					<div className="pt-4 sizes">
 						<div className="text-gray-600">size</div>
