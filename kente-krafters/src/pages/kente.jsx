@@ -28,8 +28,11 @@ export default function KenteShopping() {
 		<>
 			<div className="fluid-grid">
 				{products.map((product) => (
-					<NavLink key={product.id} to={`/checkout/${product.id}`}>
-						<ProductCard key={product.id} {...product} />
+					<NavLink
+						key={product.product_id}
+						to={`/checkout/${product.product_id}`}
+					>
+						<ProductCard key={product.product_id} {...product} />
 					</NavLink>
 				))}
 			</div>

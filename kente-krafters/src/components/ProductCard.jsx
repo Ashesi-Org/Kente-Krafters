@@ -5,7 +5,7 @@
  * content of the product card.
  */
 export function ProductCard({
-	id,
+	product_id,
 	product_name,
 	description,
 	price,
@@ -14,7 +14,10 @@ export function ProductCard({
 	seller_email,
 }) {
 	return (
-		<div className="rounded-lg  bg-card text-card-foreground  w-[334px]">
+		<div
+			id={product_id}
+			className="rounded-lg  bg-card text-card-foreground  w-[334px]"
+		>
 			<div className="flex flex-col space-y-1.5">
 				<img
 					src={image_link}
@@ -49,9 +52,7 @@ export function ProductCard({
 				<div className="text-lg font-bold">
 					{product_name} by&nbsp;{seller_email}
 				</div>
-				<div className="text-sm text-gray-500">
-					{description}
-				</div>
+				<div className="text-sm text-gray-500">{description}</div>
 				<div className="text-lg font-bold">${price}</div>
 			</div>
 		</div>
