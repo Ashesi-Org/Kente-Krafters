@@ -4,6 +4,7 @@
  * @returns The ProductCard component is returning a JSX element, which represents the structure and
  * content of the product card.
  */
+
 export function ProductCard({
 	product_id,
 	product_name,
@@ -20,7 +21,8 @@ export function ProductCard({
 		>
 			<div className="flex flex-col space-y-1.5">
 				<img
-					src={image_link}
+					// src={image}
+					src={"../assets/product_images/" + product_id + ".jpeg"}
 					alt={product_name}
 					className="w-full h-auto object-cover"
 					width="334"
