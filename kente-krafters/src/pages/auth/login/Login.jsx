@@ -39,7 +39,7 @@ const Login = () => {
 				console.log(response);
 				if (response == true) {
 					// redirect to the homepage
-					window.location.href = "/";
+					window.location.href = "/landing";
 				}
 			});
 	};
