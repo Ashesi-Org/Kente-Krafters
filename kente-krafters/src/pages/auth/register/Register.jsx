@@ -1,5 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { baseEndPoint } from "../../../../expressAPI/data";
+import login_page_hero from "../../../assets/hero_page_img.png";
+import google_logo from "../../../assets/logos/google.png";
+import company_logo from "../../../assets/logos/woven_logo_1.png";
 
 const Register = () => {
 	const handleRegisterSubmit = (e) => {
@@ -50,11 +53,7 @@ const Register = () => {
 	return (
 		<div className="container">
 			<div>
-				<img
-					src="src/assets/logos/woven_logo_1.png"
-					alt=""
-					className="w-1/4 mx-auto"
-				/>
+				<img src={company_logo} alt="" className="w-1/4 mx-auto" />
 			</div>
 			<div className="flex min-h-screen justify-center">
 				<div className="flex-1">
@@ -109,7 +108,7 @@ const Register = () => {
 					<div className="flex flex-col space-y-2 mb-3.5">
 						<button className="bg-gray-300 px-4 py-2 rounded-lg border text-black max-w-md">
 							<img
-								src="src/assets/logos/google.png"
+								src={google_logo}
 								alt=""
 								className="w-6 mr-2 inline-block"
 							/>
@@ -124,11 +123,7 @@ const Register = () => {
 				</div>
 
 				<div className="flex-1 justify-center">
-					<img
-						src="src/assets/hero_page_img.png"
-						alt=""
-						className="w mx-auto"
-					/>
+					<img src={login_page_hero} alt="" className="w mx-auto" />
 				</div>
 			</div>
 		</div>
