@@ -3,6 +3,7 @@
  * input field.
  */
 import { NavLink } from "react-router-dom";
+import Logo from "../assets/logos/woven_logo_2.png";
 
 const Navbar = () => {
 	const handleButtonClick = () => {
@@ -12,11 +13,7 @@ const Navbar = () => {
 	return (
 		<div className="container">
 			<NavLink to="/">
-				<img
-					src="src/assets/logos/woven_logo_2.png"
-					alt=""
-					className="w-32 mx-auto"
-				/>
+				<img src={Logo} alt="" className="w-32 mx-auto" />
 			</NavLink>
 
 			<div className="mb-4">
