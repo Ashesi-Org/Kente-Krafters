@@ -20,8 +20,7 @@ export default function App() {
 				<Route path="register" element={<Register />} />
 			</Route>
 			<Route path="/" element={<Layout />}>
-				<Route index element={<Login />} />
-				<Route path="landing" element={<Landing />} />
+				<Route index element={<Landing />} />
 				<Route path="kente" element={<KenteShopping />} />
 				<Route
 					path="graduation-stoles"
@@ -41,10 +40,7 @@ export default function App() {
 function Layout() {
 	return (
 		<div>
-			{/* only render navbar if not on Login or Register or the base page with nothing after the slash */}
-			{window.location.pathname !== "/login" &&
-				window.location.pathname !== "/register" &&
-				window.location.pathname !== "/" && <Navbar />}
+			<Navbar />
 
 			<div className="container py-10">
 				<Outlet />
