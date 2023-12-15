@@ -42,7 +42,7 @@ const Login = () => {
 				console.log(response);
 				if (response == true) {
 					// redirect to the homepage
-					window.location.href = "/landing";
+					window.location.href = "/";
 				}
 			});
 	};

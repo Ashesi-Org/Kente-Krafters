@@ -9,7 +9,7 @@ import { baseEndPoint } from "../../expressAPI/data";
 
 const CheckOut = () => {
 	// get the product id from the header parameters from the url
-	const productId = window.location.pathname.split("/")[2];
+	const productId = window.location.pathname.split("/")[-1];
 	// get the product data from the backend
 	const [product, setProduct] = useState({});
 	useEffect(() => {
@@ -28,9 +28,8 @@ const CheckOut = () => {
 				console.error("Error fetching product:", error);
 			}
 		};
-
 		fetchProduct();
-	}, [productId]); // Only include productId in the dependency array, not product
+	}, [productId]);
 
 	return (
 		<div className="max-w-screen-md mx-auto p-8 row">
